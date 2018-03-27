@@ -1,0 +1,22 @@
+{
+  "name": "tweet-count",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vnndi/tweet-count.git"
+  },
+  "author": "Viet Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vnndi/tweet-count/issues"
+  },
+  "homepage": "https://github.com/vnndi/tweet-count#readme",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
+}
