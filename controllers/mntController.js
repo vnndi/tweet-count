@@ -1,8 +1,8 @@
 const axios = require('axios');
 const db = require('../models');
 const Twit = require('twit');
-const config = require('./config'); // twitter keys stored in config.js
-const T = new Twit(config);
+const twitterKey = require('../config/twitter');
+const T = new Twit(twitterKey);
 
 // findAll searches the Medical News Today website and returns only the entries we haven't already saved
 module.exports = {

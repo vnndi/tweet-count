@@ -18,8 +18,6 @@ export default {
         return axios.post('/api/articles', articleData);
     },
     getTweets: details => {
-        console.log('get tweets details ');
-        console.log(details);
         return axios.get('/api/tweets', {params: details});
     }
 };

@@ -24,10 +24,11 @@
     "nodemon": "^1.12.1"
   },
   "dependencies": {
-    "twit": "^2.2.9",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongoose": "^4.13.3"
+    "mongoose": "^4.13.3",
+    "request": "^2.85.0",
+    "twit": "^2.2.9"
   }
 }
