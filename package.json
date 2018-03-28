@@ -2,9 +2,12 @@
   "name": "tweet-count",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +19,15 @@
     "url": "https://github.com/vnndi/tweet-count/issues"
   },
   "homepage": "https://github.com/vnndi/tweet-count#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1"
+  },
   "dependencies": {
-    "twit": "^2.2.9"
+    "twit": "^2.2.9",
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.3"
   }
 }

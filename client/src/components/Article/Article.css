@@ -1,0 +1,9 @@
+.tweet-info p {
+    font-size: 14px;
+    margin: 0;
+    line-height: 14px;
+}
+
+.tweet-info a:hover {
+    color: red;
+}
