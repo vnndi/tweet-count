@@ -16,5 +16,10 @@ export default {
     // Saves an article to the database
     saveArticle: articleData => {
         return axios.post('/api/articles', articleData);
+    },
+    getTweets: details => {
+        console.log('get tweets details ');
+        console.log(details);
+        return axios.get('/api/tweets', {params: details});
     }
 };

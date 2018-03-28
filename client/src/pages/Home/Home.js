@@ -34,16 +34,37 @@ class Home extends Component {
     formCheck = event => {
         event.preventDefault();
 
-        this.getArticles();
+        const details = {
+            keyword: this.state.keyword,
+            fromDate: this.state.fromDate,
+            toDate: this.state.toDate,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            country: this.state.country,
+            radius: this.state.radius
+        }
+
+        console.log(details);
+
+        API.getTweets(details)
+        .then(res => {
+            this.setState({
+                articles: res.data,
+                message: !res.data.length
+                ? "No new Tweets found, please try again."
+                : ""
+            })
+        })
+        .catch(err => console.log(err));
     }
 
     getArticles = () => {
         API.getArticles()
         .then(res => {
-            console.log(res);
             this.setState({
-            articles: res.data,
-            message: !res.data.length
+                articles: res.data,
+                message: !res.data.length
                 ? "No new Tweets found, please try again."
                 : ""
             })
