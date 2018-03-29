@@ -20,7 +20,9 @@ class Home extends Component {
         city: '',
         state: '',
         country: '',
-        radius: ''
+        radius: '',
+        unit: '',
+        language: ''
     };
 
     handleInputChange = event => {
@@ -59,16 +61,14 @@ class Home extends Component {
             city: this.state.city,
             state: this.state.state,
             country: this.state.country,
-            radius: this.state.radius
+            radius: this.state.radius,
+            unit: this.state.unit,
+            language: this.state.language
         }
-
-        console.log(details);
 
         // send API request with details object to server
         API.getTweets(details)
         .then(res => {
-            console.log('number of hits: ' + res.data.length);
-
             // update state with response from server
             this.setState({
                 articles: res.data,
@@ -81,10 +81,10 @@ class Home extends Component {
 
             // check if there's result
             if (res.data.length !== 0) {
-               
                 const word = this.state.keyword;
                 const hit = this.state.totalHit;
 
+                // update new result in localstorage
                 this.appendToStorage(word, hit)
             }
         })
@@ -139,16 +139,16 @@ class Home extends Component {
                                 <List>
                                     {this.state.articles.map(article => (
                                         <Article
-                                        key={article.id_str}
-                                        id={article.id_str}
-                                        title={article.text}
-                                        userID={article.user.id_str}
-                                        userName={article.user.screen_name}
-                                        retweetCount={article.retweet_count}
-                                        url={article.source}
-                                        date={article.created_at}
-                                        handleClick={this.handleArticleSave}
-                                        buttonText="Save Tweet"
+                                            key={article.id_str}
+                                            id={article.id_str}
+                                            title={article.text}
+                                            userID={article.user.id_str}
+                                            userName={article.user.screen_name}
+                                            retweetCount={article.retweet_count}
+                                            url={article.source}
+                                            date={article.created_at}
+                                            handleClick={this.handleArticleSave}
+                                            buttonText="Save Tweet"
                                         />
                                     ))}
                                 </List>

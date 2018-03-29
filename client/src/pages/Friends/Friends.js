@@ -70,8 +70,6 @@ class Friends extends Component {
                 <Container>
                     <Form
                         keyword={this.state.keyword}
-                        fromDate={this.state.fromDate}
-                        toDate={this.state.toDate}
                         handleInputChange={this.handleInputChange}
                         handleClick={this.getFriendTweet}
                     />
@@ -86,16 +84,16 @@ class Friends extends Component {
                                 <List>
                                     {this.state.articles.map(article => (
                                         <Article
-                                        key={article.id_str}
-                                        id={article.id_str}
-                                        title={article.text}
-                                        userID={article.user.id_str}
-                                        userName={article.user.screen_name}
-                                        retweetCount={article.retweet_count}
-                                        url={article.source}
-                                        date={article.created_at}
-                                        handleClick={this.handleArticleSave}
-                                        buttonText="Save Tweet"
+                                            key={article.id_str}
+                                            id={article.id_str}
+                                            title={article.text}
+                                            userID={article.user.id_str}
+                                            userName={article.user.screen_name}
+                                            retweetCount={article.retweet_count}
+                                            url={article.source}
+                                            date={article.created_at}
+                                            handleClick={this.handleArticleSave}
+                                            buttonText="Save Tweet"
                                         />
                                     ))}
                                 </List>

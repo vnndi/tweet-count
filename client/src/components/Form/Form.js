@@ -1,7 +1,7 @@
 import React from 'react';
 import './Form.css';
 
-const Form = ({keyword, fromDate, toDate, address, city, state, country, radius, handleInputChange, handleClick}) => (
+const Form = ({keyword, fromDate, toDate, address, city, state, country, radius, unit, language, handleInputChange, handleClick}) => (
     <form>
         <div className="form-group">
             <label htmlFor="text">Keyword</label>
@@ -19,36 +19,32 @@ const Form = ({keyword, fromDate, toDate, address, city, state, country, radius,
         </div>
         <div className="form-group friends-page">
             <label htmlFor="inputAddress">Address</label>
-            <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" name="address" value={address} onChange={handleInputChange}/>
+            <input type="text" className="form-control" id="inputAddress" placeholder="455 Massachusetts Ave NW" name="address" value={address} onChange={handleInputChange}/>
         </div>
         <div className="form-row friends-page">
             <div className="form-group col-md-6">
                 <label htmlFor="inputCity">City</label>
-                <input type="text" className="form-control" id="inputCity" name="city" value={city} onChange={handleInputChange}/>
+                <input type="text" className="form-control" id="inputCity" placeholder="Washington" name="city" value={city} onChange={handleInputChange}/>
             </div>
             <div className="form-group col-md-4">
                 <label htmlFor="inputState">State / Province</label>
-                <input type="text" className="form-control" id="inputState" name="state" value={state} onChange={handleInputChange}/>
+                <input type="text" className="form-control" id="inputState" placeholder="DC" name="state" value={state} onChange={handleInputChange}/>
             </div>
             <div className="form-group col-md-2">
                 <label htmlFor="inputCountry">Country</label>
-                <input type="text" className="form-control" id="inputCountry" name="country" value={country} onChange={handleInputChange}/>
+                <input type="text" className="form-control" id="inputCountry" placeholder="US" name="country" value={country} onChange={handleInputChange}/>
             </div>
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-2">
                 <label htmlFor="inputRadius">Radius</label>
-                <input type="text" className="form-control" id="inputRadius" name="radius" value={radius} onChange={handleInputChange}/>
+                <input type="text" className="form-control" id="inputRadius" placeholder="2" name="radius" value={radius} onChange={handleInputChange}/>
             </div>
-            <div className="form-check-inline">
-                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"/>
-                <label className="form-check-label" htmlFor="exampleRadios1">
-                    Mile(s)
-                </label>
+            <div className="form-group col-md-2">
+                <label htmlFor="inputRadius">Unit</label>
+                <input type="text" className="form-control" id="inputUnit" placeholder="mi" name="unit" value={unit} onChange={handleInputChange}/>
             </div>
-            <div className="form-check-inline">
-                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
-                <label className="form-check-label" htmlFor="exampleRadios2">
-                    Kilometer(s)
-                </label>
+            <div className="form-group col-md-2">
+                <label htmlFor="inputRadius">Language</label>
+                <input type="text" className="form-control" id="inputLanguage" placeholder="en" name="language" value={language} onChange={handleInputChange}/>
             </div>
         </div>
         <button className="btn btn-primary" onClick={handleClick}>Get Tweets</button>

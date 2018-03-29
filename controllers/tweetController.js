@@ -13,17 +13,19 @@ module.exports = {
         const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
         const until = req.query.toDate;
         const radius = req.query.radius;
+        const unit = req.query.unit;
+        const language = req.query.language;
+        const count = 100; // set number of results default: 15 max 100
 
         // FOR TESTING ONLY: <===========================================================================================
         // const word = req.query.keyword;
         // const since = '2018-03-25';
         // const until = '2018-03-27';
         // const radius = '2';
+        // const unit = 'mi';
+        // const language = 'en';
+        // const count = 100;
         // ===========================================================================
-
-        const unit = 'mi'; // or km
-        const language = 'en'; // pl for Polish
-        const count = 100; // set number of results default: 15 max 100
 
         // get user's latitude and longitude
         const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
