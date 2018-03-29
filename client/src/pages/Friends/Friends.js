@@ -64,7 +64,7 @@ class Friends extends Component {
                         <strong>Friends' Tweet Count</strong>
                     </h1>
                     <h2 className="text-center">
-                        Search tweets from people you follow.
+                        Get the latest tweets from people you follow.
                     </h2>
                 </Jumbotron>
                 <Container>
