@@ -8,17 +8,26 @@ const T = new Twit(twitterKey);
 
 module.exports = {
     findAll: (req, res) => {
+        // UNCOMMENT WHEN DEPLOY
+        // const word = req.query.keyword;
+        // const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
+        // const until = req.query.toDate;
+        // const radius = req.query.radius;
+
+        // FOR TESTING ONLY: <===========================================================================================
         const word = req.query.keyword;
-        const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
-        const until = req.query.toDate;
-        const radius = req.query.radius;
+        const since = '2018-03-25';
+        const until = '2018-03-26';
+        const radius = '2';
+        // ===========================================================================
+
         const unit = 'mi'; // or km
         const language = 'en';
         const count = 100; // set number of results default: 15 max 100
 
         // get user's latitude and longitude
-        const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
-        
+        // const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
+        const address = `1744 L St NW+washington+dc+usa`;
         request
         .get('https://maps.googleapis.com/maps/api/geocode/json?address='+ address + '&key=' + gMapKey.key, (error, geoResult, body)=>{
             const bodyObj = JSON.parse(body);

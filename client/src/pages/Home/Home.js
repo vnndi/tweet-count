@@ -32,13 +32,25 @@ class Home extends Component {
         });
     };
 
+    appendToStorage = (name, data) => {
+        var old = localStorage.getItem(name);
+
+        // check if keyword exists
+        if(old === null) old = "";
+
+        // set the matching keyword with the number of hit
+        localStorage.setItem(name, data);
+    }
+
     formCheck = event => {
         event.preventDefault();
 
+        // clear total hit
         this.setState({
             totalHit: ''
         });
 
+        // setup details object
         const details = {
             keyword: this.state.keyword,
             fromDate: this.state.fromDate,
@@ -52,38 +64,44 @@ class Home extends Component {
 
         console.log(details);
 
+        // send API request with details object to server
         API.getTweets(details)
         .then(res => {
-
             console.log('number of hits: ' + res.data.length);
 
+            // update state with response from server
             this.setState({
                 articles: res.data,
                 totalHit: res.data.length,
+                // handle notification if no result found
                 message: !res.data.length
                 ? "No new Tweets found, please try again."
                 : ""
-            })
-        })
-        .catch(err => console.log(err));
-    }
+            });
 
-    getArticles = () => {
-        API.getArticles()
-        .then(res => {
-            this.setState({
-                articles: res.data,
-                message: !res.data.length
-                ? "No new Tweets found, please try again."
-                : ""
-            })
+            // check if there's result
+            if (res.data.length !== 0) {
+               
+                const word = this.state.keyword;
+                const hit = this.state.totalHit;
+
+                this.appendToStorage(word, hit)
+            }
         })
         .catch(err => console.log(err));
     };
 
-    handleArticleSave = id => {
-        const article = this.state.articles.find(article => article.url.slice(-10).slice(0, 6) === id);
-        API.saveArticle(article).then(res => this.getArticles());
+    showReport = () => {
+        let results = {};
+
+        for(let i = 0; i < localStorage.length; i += 1) {
+            console.log(localStorage.key(i) + ': ' + localStorage.getItem(localStorage.key(i)));
+
+            // append to result object
+            results[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+        }
+
+        console.log(results);
     };
 
     render() {
@@ -112,7 +130,11 @@ class Home extends Component {
                     />
                     <Row>
                     <Col size="md-12">
-                        <Card title="Results" totalHit={this.state.totalHit}>
+                        <Card 
+                            title="Results" 
+                            totalHit={this.state.totalHit}
+                            showReport={this.showReport}
+                        >
                             {this.state.articles.length ? (
                                 <List>
                                     {this.state.articles.map(article => (
