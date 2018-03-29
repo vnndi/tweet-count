@@ -19,7 +19,7 @@ module.exports = {
         // get user's latitude and longitude
         const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
 
-        // send request to Google Maps. if use Twitter Premium, don't need this, add condition to query
+        // send request to Google Maps. if use Twitter Premium, don't need this, add condition to Twitter query
         request
         .get('https://maps.googleapis.com/maps/api/geocode/json?address='+ address + '&key=' + gMapKey.key, (error, geoResult, body)=>{
             const bodyObj = JSON.parse(body);
@@ -54,7 +54,7 @@ module.exports = {
                     // console.log(`metadata: ${JSON.stringify(dataInfo[i].metadata)}`);
                     console.log('\n');
                 }
-                
+
                 res.json(response.data.statuses);
             });
         });
@@ -86,11 +86,5 @@ module.exports = {
     }
 };
 
-// get all data
-// all users account's following <====
-// show screen name
-// show tweet
-
-// count keyword in each tweet
 // save to database?
 // export to charts

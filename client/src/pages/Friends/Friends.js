@@ -60,12 +60,10 @@ class Friends extends Component {
         return (
             <div>
                 <Jumbotron>
-                    <h1 className="text-center">
-                        <strong>Friends' Tweet Count</strong>
-                    </h1>
-                    <h2 className="text-center">
-                        Get the latest tweets from people you follow.
-                    </h2>
+                    <div className="text-center">
+                        <h1 className="display-3">Friends' Tweet Count</h1>
+                        <p className="lead">Get the latest tweets from people you follow.</p>
+                    </div>
                 </Jumbotron>
                 <Container>
                     <Form

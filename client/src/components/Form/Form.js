@@ -27,7 +27,9 @@ class Form extends Component {
                         <label htmlFor="text">Keyword</label>
                         <input type="text" className="form-control" placeholder="Enter keyword" name="keyword" value={this.props.keyword} onChange={this.props.handleInputChange}/>
                     </div>
-                    <button className="btn btn-primary" onClick={this.props.handleClick}>Get Tweets</button>
+                    <div className="text-center">
+                        <button className="btn btn-lg btn-primary" onClick={this.props.handleClick}>Get Tweets</button>
+                    </div>
                 </form>
             )
             // show full input fields if not on friends page
@@ -77,7 +79,9 @@ class Form extends Component {
                             <input type="text" className="form-control" id="inputLanguage" placeholder="en" name="language" value={this.props.language} onChange={this.props.handleInputChange}/>
                         </div>
                     </div>
-                    <button className="btn btn-primary" onClick={this.props.handleClick}>Get Tweets</button>
+                    <div className="text-center">
+                        <button className="btn btn-lg btn-primary" onClick={this.props.handleClick}>Get Tweets</button>
+                    </div>
                 </form>
             )
         )

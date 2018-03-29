@@ -116,12 +116,10 @@ class Home extends Component {
         return (
             <div>
                 <Jumbotron>
-                    <h1 className="text-center">
-                        <strong>Tweet Count</strong>
-                    </h1>
-                    <h2 className="text-center">
-                        Search &amp; save the tweets of your interest.
-                    </h2>
+                    <div className="text-center">
+                        <h1 className="display-3">Tweet Count</h1>
+                        <p className="lead">Search &amp; save the tweets of your interest.</p>
+                    </div>
                 </Jumbotron>
                 <Container>
                     <Form
