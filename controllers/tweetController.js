@@ -9,13 +9,12 @@ const T = new Twit(twitterKey);
 module.exports = {
     findAll: (req, res) => {
         const word = req.query.keyword;
-        const since = req.query.fromDate; // must be ISO format
+        const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
         const until = req.query.toDate;
-        // const location = '38.8976755,-77.0365298'; // replace with Gmap Geocoding <=======================================
         const radius = req.query.radius;
         const unit = 'mi'; // or km
         const language = 'en';
-        const count = 20; // set number of results
+        const count = 100; // set number of results default: 15 max 100
 
         // get user's latitude and longitude
         const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;

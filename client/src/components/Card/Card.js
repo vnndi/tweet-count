@@ -4,8 +4,8 @@ import './Card.css';
 const Card = props => (
     <div className="card border-primary mb-3">
         <div className="card-header text-white bg-primary border-primary">
-            <i className="fas fa-chart-line"></i>
-            <span className="card-title ml-2">{props.title}</span>
+            <i className="fas fa-list-alt"></i>
+            <span className="card-title ml-2">{props.title}: {props.totalHit}</span>
         </div>
         <div className="card-body">
             <div className="panel-body">{props.children}</div>

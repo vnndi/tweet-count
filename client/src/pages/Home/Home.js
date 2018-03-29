@@ -12,6 +12,7 @@ class Home extends Component {
     state = {
         articles: [],
         message: "Click Get Tweets",
+        totalHit: '',
         keyword: '',
         fromDate: '',
         toDate: '',
@@ -34,6 +35,10 @@ class Home extends Component {
     formCheck = event => {
         event.preventDefault();
 
+        this.setState({
+            totalHit: ''
+        });
+
         const details = {
             keyword: this.state.keyword,
             fromDate: this.state.fromDate,
@@ -49,8 +54,12 @@ class Home extends Component {
 
         API.getTweets(details)
         .then(res => {
+
+            console.log('number of hits: ' + res.data.length);
+
             this.setState({
                 articles: res.data,
+                totalHit: res.data.length,
                 message: !res.data.length
                 ? "No new Tweets found, please try again."
                 : ""
@@ -87,10 +96,6 @@ class Home extends Component {
                     <h2 className="text-center">
                         Search &amp; save the tweets of your interest.
                     </h2>
-                    
-                    <div className="text-center">
-                        <button className="btn btn-primary btn-lg" onClick={() => this.getArticles()}>Get Tweets</button>
-                    </div>
                 </Jumbotron>
                 <Container>
                     <Form
@@ -107,7 +112,7 @@ class Home extends Component {
                     />
                     <Row>
                     <Col size="md-12">
-                        <Card title="Results">
+                        <Card title="Results" totalHit={this.state.totalHit}>
                             {this.state.articles.length ? (
                                 <List>
                                     {this.state.articles.map(article => (
