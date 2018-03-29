@@ -66,29 +66,37 @@ class Home extends Component {
             language: this.state.language
         }
 
-        // send API request with details object to server
-        API.getTweets(details)
-        .then(res => {
-            // update state with response from server
+        // check if there's an address to prevent Google Maps rejects empty request
+        if (details.address === '') {
             this.setState({
-                articles: res.data,
-                totalHit: res.data.length,
-                // handle notification if no result found
-                message: !res.data.length
-                ? "No new Tweets found, please try again."
-                : ""
-            });
+                message: 'Please enter a valid address'
+            })
+        }
+        else {
+            // send API request with details object to server
+            API.getTweets(details)
+            .then(res => {
+                // update state with response from server
+                this.setState({
+                    articles: res.data,
+                    totalHit: res.data.length,
+                    // handle notification if no result found
+                    message: !res.data.length
+                    ? "No new Tweets found, please try again."
+                    : ""
+                });
 
-            // check if there's result
-            if (res.data.length !== 0) {
-                const word = this.state.keyword;
-                const hit = this.state.totalHit;
+                // check if there's result
+                if (res.data.length !== 0) {
+                    const word = this.state.keyword;
+                    const hit = this.state.totalHit;
 
-                // update new result in localstorage
-                this.appendToStorage(word, hit)
-            }
-        })
-        .catch(err => console.log(err));
+                    // update new result in localstorage
+                    this.appendToStorage(word, hit)
+                }
+            })
+            .catch(err => console.log(err));
+        } 
     };
 
     showReport = () => {

@@ -8,7 +8,6 @@ const T = new Twit(twitterKey);
 
 module.exports = {
     findAll: (req, res) => {
-        // UNCOMMENT WHEN DEPLOY
         const word = req.query.keyword;
         const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
         const until = req.query.toDate;
@@ -17,32 +16,17 @@ module.exports = {
         const language = req.query.language;
         const count = 100; // set number of results default: 15 max 100
 
-        // FOR TESTING ONLY: <===========================================================================================
-        // const word = req.query.keyword;
-        // const since = '2018-03-25';
-        // const until = '2018-03-27';
-        // const radius = '2';
-        // const unit = 'mi';
-        // const language = 'en';
-        // const count = 100;
-        // ===========================================================================
-
         // get user's latitude and longitude
         const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
-        // const address = `1744 L St NW+washington+dc+usa`;
+
+        // send request to Google Maps. if use Twitter Premium, don't need this, add condition to query
         request
         .get('https://maps.googleapis.com/maps/api/geocode/json?address='+ address + '&key=' + gMapKey.key, (error, geoResult, body)=>{
             const bodyObj = JSON.parse(body);
             const geoLoc = bodyObj.results[0].geometry.location;
             const geoLat = geoLoc.lat;
             const geoLng = geoLoc.lng;
-
-            console.log('\n location found: \n');
-            console.log(geoLat);
-            console.log(geoLng);
-
             const location = `${geoLat},${geoLng}`;
-
             const tweetParams = {
                 q: word,
                 // tweets by users located within a given radius of the given latitude/longitude
@@ -50,24 +34,12 @@ module.exports = {
                 since: since,
                 until: until,
                 lang: language,
-                // show only popular tweets:
-                // result_type: 'popular',
+                // result_type: 'popular', // show only popular tweets
                 count: count,
             }
-
-            console.log('\n tweet params: \n');
-            console.log(tweetParams);
     
             T.get('search/tweets', tweetParams)
             .then(response => {
-    
-                // show all data
-                // console.log(response);
-                console.log(response.data.statuses);
-            
-                console.log('\n==============================\n');
-                console.log('show all users:\n');
-            
                 const dataInfo = response.data.statuses;
             
                 for (let i = 0; i < dataInfo.length; i += 1) {
@@ -78,12 +50,10 @@ module.exports = {
                     console.log(`tweet id: ${dataInfo[i].id_str}`);
                     console.log(`created at: ${dataInfo[i].created_at}`);
                     console.log(`retweet count: ${dataInfo[i].retweet_count}`);
-            
                     // show metadata
                     // console.log(`metadata: ${JSON.stringify(dataInfo[i].metadata)}`);
                     console.log('\n');
                 }
-    
                 
                 res.json(response.data.statuses);
             });
