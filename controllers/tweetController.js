@@ -9,25 +9,25 @@ const T = new Twit(twitterKey);
 module.exports = {
     findAll: (req, res) => {
         // UNCOMMENT WHEN DEPLOY
-        // const word = req.query.keyword;
-        // const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
-        // const until = req.query.toDate;
-        // const radius = req.query.radius;
+        const word = req.query.keyword;
+        const since = req.query.fromDate; // must be ISO format standard key allows 7 days only check details here: https://developer.twitter.com/en/docs/tweets/search/overview
+        const until = req.query.toDate;
+        const radius = req.query.radius;
 
         // FOR TESTING ONLY: <===========================================================================================
-        const word = req.query.keyword;
-        const since = '2018-03-25';
-        const until = '2018-03-26';
-        const radius = '2';
+        // const word = req.query.keyword;
+        // const since = '2018-03-25';
+        // const until = '2018-03-27';
+        // const radius = '2';
         // ===========================================================================
 
         const unit = 'mi'; // or km
-        const language = 'en';
+        const language = 'en'; // pl for Polish
         const count = 100; // set number of results default: 15 max 100
 
         // get user's latitude and longitude
-        // const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
-        const address = `1744 L St NW+washington+dc+usa`;
+        const address = `${req.query.address}+${req.query.city}+${req.query.state}+${req.query.country}`;
+        // const address = `1744 L St NW+washington+dc+usa`;
         request
         .get('https://maps.googleapis.com/maps/api/geocode/json?address='+ address + '&key=' + gMapKey.key, (error, geoResult, body)=>{
             const bodyObj = JSON.parse(body);
@@ -86,24 +86,33 @@ module.exports = {
                 res.json(response.data.statuses);
             });
         });
+    },
+    findFriendTweet: (req, res) => {
+        const keyword = req.query.keyword;
+        let matchList = [];
+        const tweetParams = {
+            count: 200 // twitter's limit
+        };
+
+        // search for keyword in user's timeline
+        T.get('statuses/home_timeline', tweetParams)
+        .then(response => {
+            
+            for (let i = 1; i < response.data.length; i += 1) {
+                // check if there's a match
+                if (response.data[i].text.search(keyword) !== -1) {
+                    // push data of the tweet contains the keyword to list
+                    matchList.push(response.data[i]);
+                }
+            }
+            return matchList;
+        })
+        .then(response => {
+            // send to the client side
+            res.json(response);
+        })
     }
 };
-
-// // get list of user's friends
-// T.get('friends/list', { screen_name: 'klonojulio' }, (err, data, response) => {
-//     console.log(data);
-// })
-
-// stream tweets contains specific word
-// const stream = T.stream('statuses/filter', {locations: city});
- 
-// stream.on('tweet', (tweet) => {
-//     // console.log(tweet)
-
-//     data = tweet;
-
-//     console.log(data);
-// })
 
 // get all data
 // all users account's following <====

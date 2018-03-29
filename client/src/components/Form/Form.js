@@ -17,11 +17,11 @@ const Form = ({keyword, fromDate, toDate, address, city, state, country, radius,
                 <input type="text" className="form-control" id="inputFromDate" placeholder="2018-01-01" name="toDate" value={toDate} onChange={handleInputChange}/>
             </div>
         </div>
-        <div className="form-group">
+        <div className="form-group friends-page">
             <label htmlFor="inputAddress">Address</label>
             <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" name="address" value={address} onChange={handleInputChange}/>
         </div>
-        <div className="form-row">
+        <div className="form-row friends-page">
             <div className="form-group col-md-6">
                 <label htmlFor="inputCity">City</label>
                 <input type="text" className="form-control" id="inputCity" name="city" value={city} onChange={handleInputChange}/>

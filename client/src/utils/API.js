@@ -19,5 +19,8 @@ export default {
     },
     getTweets: details => {
         return axios.get('/api/tweets', {params: details});
+    },
+    getFriendTweets: details => {
+        return axios.get('/api/friendtweets', {params: details});
     }
 };

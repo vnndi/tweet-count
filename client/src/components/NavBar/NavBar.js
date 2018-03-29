@@ -36,7 +36,7 @@ class NavBar extends Component {
                 <div className={this.state.iconCollapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show'} id="nav-content">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link to="/saved" className="nav-link" onClick={this.toggleIcon}>Saved Tweets</Link>
+                            <Link to="/friends" className="nav-link" onClick={this.toggleIcon}>Friends</Link>
                         </li>
                     </ul>
                 </div>
