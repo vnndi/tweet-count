@@ -55,6 +55,10 @@ module.exports = {
                     console.log('\n');
                 }
 
+                console.log('========================================');
+                console.log('keyword: ' + word);
+                console.log('number of tweets: ' + dataInfo.length);
+
                 res.json(response.data.statuses);
             });
         });
