@@ -7,7 +7,8 @@
     "server": "node server.js",
     "client": "node scripts/start-client.js",
     "start": "concurrently \"nodemon server.js\" \"npm run client\"",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,10 @@
   },
   "homepage": "https://github.com/vnndi/tweet-count#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
     "concurrently": "^3.5.0",
+    "mocha": "^5.0.5",
+    "nightmare": "^3.0.1",
     "nodemon": "^1.12.1"
   },
   "dependencies": {
