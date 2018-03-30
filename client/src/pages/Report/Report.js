@@ -16,8 +16,8 @@ class Report extends Component {
         let results = Object.keys(tmp).map(key => {
             return [key, tmp[key]];
         });
-        // NOTE: it's a lot easier to do it this way than saving results as an array in the first place because:
-        // when saving an object containing a pair of name and value: looping through an array of objects and check each object's name to avoid duplicate is more complicated than saving an object to an object 
+        // NOTE: it's a lot easier to do it this way than saving results as an array because:
+        // when saving an object containing a pair of name and value: looping through an array of objects and checking each object's name to avoid duplicate is more complicated than saving an object to an object 
 
         this.state = {
             results

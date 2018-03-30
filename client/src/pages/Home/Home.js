@@ -34,18 +34,7 @@ class Home extends Component {
         });
     };
 
-    // this function appends new pair of key and value to localstorage
-    appendToStorage = (name, data) => {
-        var old = localStorage.getItem(name);
-
-        // check if keyword exists
-        if(old === null) old = "";
-
-        // set the matching keyword with the number of hit
-        localStorage.setItem(name, data);
-    };
-
-    // this function appends new data as string to a specific key in localstorage
+    // append new data as string to a specific key in localstorage
     appendToResult = (name, data) => {
         // set results as an object to avoid duplicates entries
         let results = JSON.parse(localStorage.getItem('results')) || {};
@@ -56,6 +45,7 @@ class Home extends Component {
         localStorage.setItem('results', JSON.stringify(results));
     };
 
+    // handle form submit
     formCheck = event => {
         event.preventDefault();
 
@@ -78,7 +68,7 @@ class Home extends Component {
             language: this.state.language
         }
 
-        // check if there's an address to prevent Google Maps rejects empty request
+        // check if there's an address to prevent Google Maps reject empty request
         if (details.address === '') {
             this.setState({
                 message: 'Please enter a valid address'
@@ -110,7 +100,18 @@ class Home extends Component {
         } 
     };
 
-    // this function show report in the console, maynot need if having a specific report page
+    // append new pair of key and value to localstorage <== MIGHT NOT NEED
+    appendToStorage = (name, data) => {
+        var old = localStorage.getItem(name);
+
+        // check if keyword exists
+        if(old === null) old = "";
+
+        // set the matching keyword with the number of hit
+        localStorage.setItem(name, data);
+    };
+
+    // show report in the console, maynot need if having a specific report page <== MIGHT NOT NEED
     showReport = () => {
         let results = {};
 
@@ -143,34 +144,34 @@ class Home extends Component {
                         handleClick={this.formCheck}
                     />
                     <Row>
-                    <Col size="md-12">
-                        <Card 
-                            title="Results" 
-                            totalHit={this.state.totalHit}
-                            // showReport={this.showReport} // use if show report button on result card
-                        >
-                            {this.state.articles.length ? (
-                                <List>
-                                    {this.state.articles.map(article => (
-                                        <Article
-                                            key={article.id_str}
-                                            id={article.id_str}
-                                            title={article.text}
-                                            userID={article.user.id_str}
-                                            userName={article.user.screen_name}
-                                            retweetCount={article.retweet_count}
-                                            url={article.source}
-                                            date={article.created_at}
-                                            handleClick={this.handleArticleSave}
-                                            buttonText="Save Tweet"
-                                        />
-                                    ))}
-                                </List>
-                            ) : (
-                                <h3 className="text-center">{this.state.message}</h3>
-                            )}
-                        </Card>
-                    </Col>
+                        <Col size="md-12">
+                            <Card 
+                                title="Results" 
+                                totalHit={this.state.totalHit}
+                                // showReport={this.showReport} // use if show report button on result card
+                            >
+                                {this.state.articles.length ? (
+                                    <List>
+                                        {this.state.articles.map(article => (
+                                            <Article
+                                                key={article.id_str}
+                                                id={article.id_str}
+                                                title={article.text}
+                                                userID={article.user.id_str}
+                                                userName={article.user.screen_name}
+                                                retweetCount={article.retweet_count}
+                                                url={article.source}
+                                                date={article.created_at}
+                                                handleClick={this.handleArticleSave}
+                                                buttonText="Save Tweet"
+                                            />
+                                        ))}
+                                    </List>
+                                ) : (
+                                    <h3 className="text-center">{this.state.message}</h3>
+                                )}
+                            </Card>
+                        </Col>
                     </Row>
                     <Footer />
                 </Container>
