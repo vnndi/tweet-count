@@ -5,7 +5,7 @@ const Footer = () => (
     <footer>
         <hr />
         <div className="text-right">
-        API from: <a href="https://developer.twitter.com/en/docs/api-reference-index" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://ndi.org" target="_blank" rel="noopener noreferrer">NDI.org</a> &copy; 2018
         </div>
     </footer>
 )

@@ -34,6 +34,7 @@ class Home extends Component {
         });
     };
 
+    // this function appends new pair of key and value to localstorage
     appendToStorage = (name, data) => {
         var old = localStorage.getItem(name);
 
@@ -42,7 +43,18 @@ class Home extends Component {
 
         // set the matching keyword with the number of hit
         localStorage.setItem(name, data);
-    }
+    };
+
+    // this function appends new data as string to a specific key in localstorage
+    appendToResult = (name, data) => {
+        // set results as an object to avoid duplicates entries
+        let results = JSON.parse(localStorage.getItem('results')) || {};
+        // NOTE: if saving results as an array, need fuction to check for existing pair of name and value -> more work than it's worth
+
+        // add to results object with name and data
+        results[name] = data;
+        localStorage.setItem('results', JSON.stringify(results));
+    };
 
     formCheck = event => {
         event.preventDefault();
@@ -91,25 +103,21 @@ class Home extends Component {
                     const word = this.state.keyword;
                     const hit = this.state.totalHit;
 
-                    // update new result in localstorage
-                    this.appendToStorage(word, hit)
+                    this.appendToResult(word, hit);
                 }
             })
             .catch(err => console.log(err));
         } 
     };
 
+    // this function show report in the console, maynot need if having a specific report page
     showReport = () => {
         let results = {};
 
         for(let i = 0; i < localStorage.length; i += 1) {
-            console.log(localStorage.key(i) + ': ' + localStorage.getItem(localStorage.key(i)));
-
             // append to result object
             results[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
         }
-
-        console.log(results);
     };
 
     render() {
@@ -139,7 +147,7 @@ class Home extends Component {
                         <Card 
                             title="Results" 
                             totalHit={this.state.totalHit}
-                            showReport={this.showReport}
+                            // showReport={this.showReport} // use if show report button on result card
                         >
                             {this.state.articles.length ? (
                                 <List>
